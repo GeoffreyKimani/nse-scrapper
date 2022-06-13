@@ -81,6 +81,9 @@ def create_app(test_config=None):
     except OSError:
         pass
 
+    # Extensions SetUp
+    ext = extensions_set_up(app)
+
     @app.shell_context_processor
     def make_shell_processor():
         return {
