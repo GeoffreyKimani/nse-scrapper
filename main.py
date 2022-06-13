@@ -1,21 +1,14 @@
-from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
+import os
+from scrapper.app_factory import create_app
 
-# create flask app instance
-app = Flask(__name__)
-app.debug = True
+debug = True
 
-# Database configuration
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://jeffkim:kim@localhost:5432/nse_data'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
-
-db = SQLAlchemy(app)
-
-
-@app.route('/')
-def index():
-    return '<h1>Learn something interesting</h1>'
-
+# Bind to $PORT if defined, otherwise default to 5000.
+port = int(os.environ.get('PORT', 5000))
 
 if __name__ == '__main__':
-    app.run()
+    app = create_app()
+    app.run(
+        host='0.0.0.0',
+        port=port
+    )

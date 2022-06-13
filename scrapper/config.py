@@ -1,5 +1,5 @@
 import os
-from constants import SECRET_KEY, PASSWORD_SALT, DATABASE_URI
+from scrapper.constants import SECRET_KEY, PASSWORD_SALT, DATABASE_URI
 
 
 class BaseConfig(object):
