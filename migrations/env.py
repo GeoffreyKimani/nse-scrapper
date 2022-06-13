@@ -7,6 +7,7 @@ from flask import current_app
 
 from alembic import context
 
+from scrapper.model.database import BaseModel
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config
@@ -30,6 +31,14 @@ target_metadata = current_app.extensions['migrate'].db.metadata
 # can be acquired:
 # my_important_option = config.get_main_option("my_important_option")
 # ... etc.
+
+config.set_main_option(
+    'sqlalchemy.url', current_app.config.get(
+        'SQLALCHEMY_DATABASE_URI').replace('%', '%%'))
+
+models = BaseModel.migrate_db()
+for model in models:
+    target_metadata = model.metadata
 
 
 def run_migrations_offline():
