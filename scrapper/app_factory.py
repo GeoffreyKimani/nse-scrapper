@@ -94,4 +94,9 @@ def create_app(test_config=None):
     def index():
         return '<h1>Learn something interesting</h1>'
 
+    @app.route('/scrapper')
+    def scrapper():
+        from scrapper.pdf_scrapper import pdf_scrapper
+        return pdf_scrapper()
+
     return app
